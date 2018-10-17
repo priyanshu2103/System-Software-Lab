@@ -1,0 +1,120 @@
+PROBLEM 1
+    1.
+        first make a file wih rwxrwxrw- (first of user then group then others) permission using chmod 776 filename
+        then use ls -Rl | grep "rwxrwxrw-"
+
+    2.
+        ls -al | grep "Aug" | wc -l (to count the number of lines)
+    3.
+        using du we have du -sh * | grep [0-9]M
+
+    4.
+        ls -al | grep -v Sep
+
+PROBLEM 2
+    1.
+        grep z[a-z]a Documents/SEM\ 3/CS241/lab4_A/words.txt 
+             z[^p]a will remove all having p in between 
+    2.
+        grep -e "apple" -e "papaya" -e "kiwi" Documents/SEM\ 3/CS241/lab4_A/words.txt 
+    3.
+        grep ^abid Documents/SEM\ 3/CS241/lab4_A/words.txt    all words starting with abid
+        grep abid$ Documents/SEM\ 3/CS241/lab4_A/words.txt    all words ending with abid
+    4.
+        grep ever$  Documents/SEM\ 3/CS241/lab4_A/words.txt
+    5.
+        grep [a,e,i,o,u][a,e,i,o,u][a,e,i,o,u][a,e,i,o,u]  Documents/SEM\ 3/CS241/lab4_A/words.txt 
+    6.
+        grep '^........$' Documents/SEM\ 3/CS241/lab4_A/words.txt | sort -r
+    7.
+        grep -e '^[n,m].*oon' Documents/SEM\ 3/CS241/lab4_A/words.txt
+        s.* matches s followed by zero or more characters, for example: "s" and "saw" and "seed".
+
+SED
+    $sed 's/unix/linux/' geekfile.txt   to replace  1st occurence of unix in every line with linux
+    $sed 's/unix/linux/n' geekfile.txt  to replace  nth occurence of unix in every line with linux
+    $sed 's/unix/linux/g' geekfile.txt  to replace all occurences of unix in every line with linux
+    $sed 's/unix/linux/3g' geekfile.txt  to replace all occurences from nth of unix in every line with linux
+    \(...\) would capture the characters specified inside of the parens and \1 would be used to reference the first match, this is a part of regex.
+    If two captures inside brackets then use \2 for second capture
+    \b marks the end of word 
+    $ echo "Welcome To The Geek Stuff" | sed 's/\(\b[A-Z]\)/\(\1\)/g'  prints (W)elcome (T)o (T)he (G)eek (S)tuff
+    echo "Welcome To The Geek Stuff" | sed 's/\(\b[A-Z]\)/(\1\)/g'     prints (W)elcome (T)o (T)he (G)eek (S)tuff
+    $sed '3 s/unix/linux/g' geekfile.txt    replce unix with linux on line 3
+    $sed 's/unix/linux/p' geekfile.txt    prints replaces twice if line is not replaced then printed only once
+    $sed -n 's/unix/linux/p' geekfile.txt  displays only replaced lines not the duplicate ones
+    $sed '1,3 s/unix/linux/' geekfile.txt    change on a range of lines
+    $ sed 'nd' filename.txt                  deletes line n from the file
+    $ sed '$d' filename.txt                  deletes last line
+    $ sed '3,6d' filename.txt  deletes lines from 3 to 6
+    $ sed '/pattern/d' filename.txt    deletes lines with matching patterns
+
+PROBLEM 3
+    1.
+        sed 's/ernet.in/ac.in/g' Email_old.txt > Email_new.txt 
+    2.
+
+    3.
+        sed 's/!*!/./g' msg.txt > new_msg.txt
+    4.
+
+
+AWK
+    main syntax --> awk options 'selection _criteria {action }' input-file > output-file
+    -f program-file : Reads the AWK program source from the file 
+                    program-file, instead of from the 
+                    first command line argument.
+    -F fs           : Use fs for the input field separator
+    $awk '{print}' filename   by default awk prints every line of data
+    $ awk '/pattern/{print}' filename     prints all the lines which have patterns in them
+    If the line has 4 words, it will be stored in $1, $2, $3 and $4 respectively.
+    Also, $0 represents the whole line. 
+    $ awk '{print $1,$4}' filename   prints column 1 and 4 of all the lines
+    NR: NR command keeps a current count of the number of input records. Remember that records are usually lines.
+        Awk command performs the pattern/action statements once for each record in a file.
+    $ awk '{print NR,$0}' filename will print all the lines with thier serial number in the beginning
+    NF: NF command keeps a count of the number of fields within the current input record.
+    $ awk '{print $1,$NF}' filename print 1st and last feild of every line
+    $ awk 'NR==3, NR==6 {print NR,$0}' employee.txt display lines from 3 to 6
+    FS is used as field separator  by default white space or tab
+    $ awk 'NF > 0' geeksforgeeks.txt  to print any non empty line in file
+    $ awk '{ if (length($0) > max) max = length($0) } END { print max }' geeksforgeeks.txt
+        to get max length of any line
+    $ awk 'END { print NR }' geeksforgeeks.txt to count the lines int he file
+    $ awk '{ if($3 == "B6") print $0;}' geeksforgeeks.txt  to check for string in any column
+    $ awk 'BEGIN { for(i=1;i<=6;i++) print "square of", i, "is",i*i; }'  to print squares form 1 to 6
+    When the BEGIN pattern is used in a script, all the actions for BEGIN are executed once before any input line is read.
+    When all input lines have been read and dealt with, in case you specify the END pattern, the action(s) will be executed.
+    awk '
+            BEGIN{actions}
+            /patterns/{actions}
+            ...
+            END{actions}' filename
+
+AWK QUESTIONS
+    1.awk 'BEGIN{i=0}{i++;}END{print i}' sample.txt
+        semicolons are not necessary
+
+    2.awk '{if($2=="515042969") print $3}' sample.txt 
+      awk '{if($2=="515042969"){i+=$3}}END {print i}' sample.txt   to get sum of all these values
+    
+    3. awk '{if($2=="515042969"){i+=$3*$10}}END {print i}' sample.txt   product all the tasks with sidc usage
+
+    4.awk '{if($11==1) print $0}' sample.txt
+
+    5.awk '{if($8>0.001 && $8<0.009) print $0}' sample.txt 
+
+    6. awk '{if(length($0)>max){max=length($0)}}END {print max}' sample.txt 
+
+    7.awk 'NR==100,NR==200 {print NR,$2,$8,$9,$10}' sample.txt 
+
+    8.awk '{if($7<=0)print > sample1.txt;else print > sample0.txt}' sample.txt  
+        should work but not working 
+
+    9.awk 'NR%100==1{x="file"++i}{print > x}' sample.txt 
+
+    10.first make a file some values in it eg i made the serial numbers filie using 
+        awk '{print NR}' sample.txt > file.txt
+       then to add the two files use 
+       awk '{getline f1 < "file.txt";print f1,$0}' sample.txt > sample_file.txt
+       

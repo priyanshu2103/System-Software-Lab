@@ -1,0 +1,46 @@
+Q.1 
+
+	 Access my laptop from my lab pc
+	Do ssh <ip address of my laptop>
+	voila!! you are in my laptop now....
+
+	scp(secure copy) <filename> <ip address of machine in which you wanna copy>:<address where to put that file> <put file name by which you wanna 		save>
+
+	ssh -X <ip address>
+	by this I can access my laptop's GUI features also, like sublime text and all
+
+Q.2 
+	getting a git repo in my pc from my laptop
+	git clone git+ssh://<username>@172.16.115.46(ip address of computer in which I wanna clone)/~/github (making the folder name)
+
+Q.3 
+	git status
+
+Q.4 
+	Do gcc hello.c
+	and then git status
+
+Q.5 make some changes in the file
+	git status will tell some file is modified
+	git diff tells you what line is modified or changed or deleted
+
+Q.6 after you have staged
+	git revert HEAD <filename>(which you wanna revert)
+	now make the changes
+	Then stage and commit (or directly commit using -am)
+
+Q.7 write git pull git+ssh://<username>@172.16.115.46(ip address of computer in which I wanna clone)/~/github (making the folder name)
+		(git clone karne se ye dikhayega ki already vo folder bana hua hai, kyuki pehle clone kiya tha, to git pull karna)
+		Now if you do git status in your local repo: It will show, new file 'a.out' and modified 'hello.c'
+		cat hello.c 9dekh lena jo local mein kiya hai vo reflect hua ki nhi)
+		and these files are already staged, you just need to commit
+		check that whatever you changed in remote repo has been reflected in local repo
+		Now just commit and both your local and remote repo has been synched
+
+Q.8 you have to do git diff --staged
+
+Q.9 git rm will already stage the deleted change, you just have to commit
+	when you do rm, you will have to add and then commit for change to be reflected
+
+Q.10 
+

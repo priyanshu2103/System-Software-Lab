@@ -1,0 +1,80 @@
+											SECURE SHELL (SSH)
+
+
+1. Make a repo on your local machine by git init
+2. Set your username and email id by following commands
+	git config --global user.name "priyanshu2103"
+	git config --global user.email "priyanshu.singh2k@gmail.com"
+	(this will set globally on all your repos, if you want on your local repo only, remove global from your command)
+
+	to see the properties
+		git config --list
+
+3. Using git with a proxy server
+	git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
+
+	After doing this, to see your set proxy
+	do either git config --list OR git config --global --get http.proxy 
+
+4. Set up SSH key on your github account with your computer( YOUTUBE pe dekhna hai)
+	
+	ssh-keygen -t rsa -b 4096 -C "your_email@example.com" (generates the SSH key)
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
+	sudo apt-get install xclip
+	xclip -sel clip < ~/.ssh/id_rsa.pub (copies SSH key to clipboard)
+	Do add SSH key in git repo
+
+5. git add . (add means add all the changes that have been made in the repo where git is present, '.' means the current directory or folder)
+
+6. git log --author="<authorname" (gives the changes made by the specified authorname)
+
+7. Access my laptop from my lab pc
+	Do ssh <ip address of my laptop>
+	voila!! you are in my laptop now....
+
+8. scp(secure copy) <filename> <ip address of machine in which you wanna copy>:<address where to put that file> <put file name by which you wanna 		save>
+
+9. ssh -X <ip address>
+	by this I can access my laptop's GUI features also, like sublime text and all
+
+10. arp -a (it will tell all the machines that I have logged in)
+	sudo arp-scan --localnet (tell all the machines active right now)
+	ifconfig(network display about my pc)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+												GIT
+
+1. difference between git diff and git diff --staged
+	
+	if we have a file, we make some changes(now to compare it with git file in repo)
+			Do git diff
+			and doing git diff --staged will cause nothin
+
+	if we have a file, we make some changes and stage the changes
+			git diff will show nothing
+			and doing git diff --staged will show the changes
+
+2. git commit -am ( this will commit directly to repo without going to staging area)
+	Use this command only for the simple edits, not when you delete and not when you rename it
+
+3. Suppose you messed up a file, now but we want to get original files from repo
+	Do git checkout -- <filename(ex: index.html)>
+
+4. git mv <filename1> <filename2> (will rename filename1 to filename2)
+	git mv <filename1> <address daal de> (will move and rename filename1 to other location)
+
+5. git reset HEAD <filename> (ex: index.html)
+	removes the file from STAGING area
+
+6. reverting to an old version of git
+	Do git log
+	See the encryption key of the commit you wanna revert to
+	Do git checkout <5-6 characters of the key> -- <filename> (ex: index.html)
+	now commit this index.html
+
+	( think it like this first > second >third, now if I want to move to second version , it will become like this
+		first > second> third> second)
+
+

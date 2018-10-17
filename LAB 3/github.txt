@@ -1,0 +1,39 @@
+git init        // Initialize a directory to a git repository
+
+ssh cse@172.16.115.31       // Connect to remote host using ssh
+
+git clone git+ssh://cse@172.16.115.31/~/LavishGulati/git
+
+git pull git+ssh://cse@172.16.115.31/~/LavishGulati/git
+
+git show        // Shows objects in a dir (trees, commits etc)
+
+git diff        // Show changes which are not yet staged
+
+git clone       // Clones the remote repository into a newly created directory locally
+
+git add         // Stages all the changes made for commit
+
+git status      // Show the differences between the last commit and the current working
+                   tree
+
+git commit       // Save the final changes in a new commit with a log message
+
+git rm      // Deletes a file and stages it for commit (adds it)
+
+git mv      // Moves a file and stages it for commit (adds it)
+
+git pull    // Incorporates/downloads changes from a remote repository into the local
+               repository
+
+git push       // Updates remote repository with the changes made in the local repository
+
+git log     // Shows commit logs
+
+git revert      //
+
+git reset --hard
+
+git reset --soft
+
+git reset --mixed

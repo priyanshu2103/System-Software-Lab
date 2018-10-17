@@ -1,0 +1,77 @@
+Problem 1: mkdir dir
+           cd dir
+           git init
+
+OR
+
+           ssh cse@172.16.115.31
+           mkdir dir
+           cd dir
+           git init
+           touch hello.c
+           echo '#include <stdio.h>' > hello.c
+           echo >> hello.c
+           echo 'int main(){' >> hello.c
+           echo 'printf("hello world\n");' >> hello.c
+           echo '}' >> hello.c
+           gcc hello.c
+           ./a.out
+           git status
+           git add .
+           git config user.email "lavish00gulati@gmail.com"
+           git config user.name "LavishGulati"
+           git commit -m "Added hello.c file"
+           git status
+
+Problem 2: git clone URL
+
+OR
+
+           git clone git+ssh://cse@172.16.115.31/~/LavishGulati/git
+
+Problem 3: git status
+
+Problem 4: echo '// Changes added v1' >> hello.c
+           git status
+           git diff hello.c
+
+Problem 5: git add .
+           echo '// Comments added v2' >> hello.c
+           git status
+           git diff hello.c
+
+Problem 6: git add .
+           echo '// Comments added v3' >> hello.c
+           git status
+           git diff hello.c
+
+Problem 7: git commit -m "Added more changes to hello.c"
+           git clone git+ssh://cse@172.16.115.31/~/LavishGulati/git
+           exit
+           git diff hello.c
+           cat hello.c
+           git status
+
+Problem 8: git diff
+
+Problem 9: gcc hello.c -o output
+           gcc hello.c -o exe
+           git add .
+           git commit -m "Added copies of executable file a.out"
+           rm output
+           git status
+           git rm exe
+           // git rm exe deletes the exe file and stages it for commit
+           // rm output deletes the output file but doesnt stage it for commit
+
+Problem 10: git reset --hard commitID
+
+            -OR-
+
+            git revert commitID
+
+Problem 11: git reset --hard commitID
+
+            -OR-
+
+            git revert commitID
