@@ -1,0 +1,289 @@
+GENERAL INFORMATION:
+
+1. Pattern specification:
+	* : variable number of varying characters
+	? : 1 varying character
+	^ : negation
+	eg: ls --ignore=*[^a,A-Z,0-9].txt : ignores all .txt files not ending with a,A-Z or 0-9
+
+
+UNIX COMMANDS:
+1. ls:
+	flags:
+	- -a: list all(including hidden files)
+	- -r: in reverse order
+	- -d:list only directories
+	- -s:size of that directory excluding the sub-directories
+		-h : size displayed in human readable form
+		-k : ----/-----/------- in kilobytes
+	- --ignore=PATTERN/-Ipattern: ignore all files with the specified pattern
+	- -l: print in long form with all the read-write details,etc.
+		the read write info is specified as follows: 
+			1. owner
+			2. group
+			3. other
+		eg:-rwxrwxr-x : a file that can r,w and x(executed) by root and owner, but can only be read and executed by group
+		NOTE: if the first character is d: directory	
+	- -R: recursively list all the subdirectories as well
+2.du: (disk usage)
+	flags:
+	- -s: lists only block size
+		-h: human readable form
+		-b : bytes
+		-m : megabytes
+		-k :kilobyte
+3.wc:(word count) wc file_name(or pattern) 
+		outputs the word count
+	flags:
+		-l : counts the number of lines
+		-c : character count
+	 	-L : max. line length
+4. touch file_name: creates a file with the name specified
+
+5. echo text>> file_name
+	- >>: appends the text into file
+	- > : overwrites and then enters the text(creates a new files if necessary)
+
+6. app_name file_name & : opens the specified file via specified application
+
+7. grep pattern file_name: seacrhes for pattern in the filename
+
+	Read about REGEX : https://www.regular-expressions.info/quickstart.html
+	Read about EREGEX : https://www.regular-expressions.info/posix.html
+	-- $ : matches with end of string
+	-- ^ : matches with beginning of string	
+	-- . : matches with any 1 single character	
+	-- .*: used to search anything after a pattern grep "a.*z" file_name :this searches anything starting with a and ending with z
+	-- * : searches anything before a pattern e.g. grep "*am" file_name :this searches anything ending with am
+	FLAGS:
+	-  -l: list only filenames
+	-  -i: case insensitive search
+	-  -w: exact word search
+	-  -c: counts the number of matches
+	-  -v:	ignores the pattern specified, format : grep -v "pattern" file_name
+	eg: to move all files with a pattern say $a
+	mv $(grep $a *.txt) /home/new_dir
+8. USER COMMANDS:(run as root user)
+	**** man useradd ****
+	1. useradd -d homedirectory_name -m user_name
+		-d: specify h_directory name
+		-m: make home directory
+		-g: specify primary group name/id
+		-G: specify secondary groups/id
+	2. usermod -l new_name user_name
+		-l : change login username
+		-a : add into a new group
+		-g : change primary group name
+		-G : change secondary groups of the user(deletes from the previous groups)
+		-s : change shell eg: usermod -s /sbin/nologin user_name
+	3. passwd user_name: to change/add password
+	4. userdel -r user_name
+		-r: delete all the directories as well
+	5. su user_name: switch user to user_name
+	6. groupadd group_name
+		- id user_name
+	7. groupdel group_name
+	9. groupmod -n new_name group_name 
+ 	
+	IMPORTANT FILES:
+	1. /etc/passwd : contains user information
+	2. /etc/shadow : stores all the passwords
+	3. /etc/groups : contains group information
+9. Logging:
+	2 files:
+	1. /var/log/syslog
+	2. /var/log/auth.log 
+10. SSH:
+	ssh user_name@IP
+11. TAR:
+	.tar : archived into 1
+	.gz : compresssed
+	flags:
+	-c : create a new archive
+	-f : file_name specify
+	-t : list contents of an archive
+	-x : extract from an archive
+	-A : append tar files into 1
+	1. tar -tf file_name: views contents of the compressed file without untarring it
+	2. tar -cf new_archive_name file_to_be_compressed
+	3. tar xf archive_name
+	4. tar -A new_tar_file pattern(specifiying_files_to_appended)
+12. split -b size file_name
+	-- additional-suffix : specify a suffix 
+13.parted:
+	***** remember always to format after creating partition *****
+	COMMANDS:
+	1. select /dev/sdb1 : to go to removable disk and use parted for it
+	2. mklabel : create a new partition table 
+		types: gpt,msdos
+	3. mkpart : to make a partition
+		types: ext2/3,vfat,ntfs...
+	4. rm : to remove a partition
+	5. resizepart: to resize a partition
+14. mkfs.file_system_type /dev/sdb1(partition name)
+15. fdisk /dev/sdb
+	commands:
+	1. m : manual
+	2. n: new partition
+	3. d: delete partition
+	4. g: create a new gpt partition table
+	5. ***** w: write the changes to disk (always do this)
+	6. p: print the partition table
+16. ln : create a link
+	ln file_name new_link_name	
+	default : hardlink
+	flags:
+	-s : to create a soft link 
+17. sccs:
+	*** first create a directory with a folder named SCCS.
+	- sccs create file_name
+	- sccs prt file_name : show the delta table
+	- sccs edit file_name (checkout a file)
+	- sccs delta file_name (check in)
+	- sccs  file_name
+	- sccs get file_name ( to get a readable version)
+	- sccs cdc -r1.x file_name : to add a comment to version 1.x
+	** -r : to specify SID of a version
+	- sccs diffs file_name : shows changes to be checked in
+	- sccs diffs -r1.x file_name : shows changes between current and version 1.x
+	- sccs sccsdiff -r1.x -r1.y file_name: shows differences between version 1.x and 1.y
+	- sccs get -k -r1.x -Gnew_file_name : get a file copy of version 1.x by the name new_file_name
+	- sccs unedit file_name : removes the checked out file without commiting any changes
+	- sccs get -c"yy/mm/dd hh:mm:ss" file_name : get the version of the file made before the specified time
+	- sccs rmdel -r1.x file_name : deletes the version 1.x
+	- sccs edit -x1.x,1.y file_name : while checking out exclude changes from version 1.x and 1.y
+18. make:
+	$@ : to the left of colon
+	$^ : all the strings right of the colon
+	$< : first string to the right of colon
+	CONDITIONALS:
+	
+	ifeq (a,b)
+	target :
+		---- command ------
+	endif  
+	ITERATIVE:
+	
+	for variable in 1 2 3 4; do \
+		---- command --- ; \ (if using value of number use $$(variable)
+	done
+19. Bootable :
+	dd if=source of=/dev/sdb1
+	** source should be the complete address of an iso file
+	MOUNTING:
+	mkdir -p /mnt/a_name
+	mount -o loop iso_file_name /mnt/a_name bs=1M
+	UNMOUNTING:
+	unmount file_name.iso
+20. GIT:
+	*** git config --global user.email emailid
+	*** git config --global user.name NAME
+	1. git init repo_name
+	2. git add file_name : to add the file into index(staging area)
+	3. git commit -m "comment" : files: index--> repo
+	4. git status : shows the changes to be committed
+	5. git log : shows the history of commits
+	6. git rm file : equivalent to rm file + commit that change
+	7. git diff : difference between index and working copy
+	8. git diff --staged rev_a: difference between staged file and rev_a(default is HEAD, the pointer to latest commit)
+	9. git reset id --hard : id can be HEAD or get it from git log command 
+	10. git checkout
+	11. git clone address:
+		eg: ssh://username@IP/home/...../repo_name 
+	12. git push origin master : origin -> from where it was cloned; master -> the main branch of the repo
+21. sort: sorts lines of a text file
+	FLAGS:
+	-- -r: sort in reverse alphabetic order
+		   
+Commands related to lab assignment 3 (based on grep, egrep, sed, awk)
+Arranged according to question numbering
+
+
+Q.1 
+	(1) Do ls -Rl | grep "rwxrwxrw" (-R will do all the files recursively, and search for the given permission)
+
+	(2) ls -l | grep -w "Aug" | wc -l ( word count to count the number of lines)
+		OR
+		grep -c <pattern> <filename> (tells the number of times pattern is matched)
+
+	(3) ls -s | egrep "[0-9]{4,} "
+		ls -s | grep "[0-9]\{4,\} "
+
+		egrep is extended regular expression, to use special meaning of curly brackets in grep we need to do backslash 
+
+
+	(4) ls -l | grep -v -w Sep | wc -l (-v just inverts the matching, all except September)
+
+Q.2 
+	(1) grep "z.a" words.txt OR grep "z[a-z]a" OR grep "z[^p]a"(in square brackets ^ means if you want to ignore some specific pattern, can also write multiple patterns like ^gw) (if you wanna ignore all patterns with p in middle of z and a)
+
+	(2) grep -e "apple" -e "papaya" -e "kiwi" words.txt (for searching multiple strings)
+		OR grep -E "apple|papaya" words.txt
+		OR egrep "apple|papaya" words.txt
+
+	(3) grep ^abid words.txt (^ in starting means match all words that begin with abid) 
+
+	(4) grep ever$ words.txt ($ matches the pattern at the end of file)
+
+	(5) grep "[a,e,i,o,u][a,e,i,o,u][a,e,i,o,u][a,e,i,o,u]" words.txt 
+		OR egrep "[a,e,i,o,u]{4}" words.txt
+		OR grep "[a,e,i,o,u]\{4\}" words.txt
+
+	(6) grep "^........$" words.txt | sort -r (note that here the carat is necessary, sort -r will print the searched result in reverse alphabetical order)
+		OR egrep "^.{8}$" words.txt | sort -r
+		OR egrep -w ".{8}" words.txt | sort -r  (-w,  matches that form whole word of 8 letter)
+
+	(7) grep - "^[n,m].*oon" words.txt
+		* means predecessor wala (. matches zero or more dots)
+
+		-->  .* matches zero or more than one characters, Ex: noon as well as njkoon will be searched
+
+Q.3
+	(1) sed 's/ernet.in/ac.in/g' email_old.txt > email_new.txt
+
+	(2)  sed 's/\bpublic\b/private/g' QuizProgram.java > QuizProgram_new.java
+		\bpublic\b (\b will match the exact word)
+
+	(3)  sed 's/!*!/./g' msg.txt > new_msg.txt
+			!*! will take all the exclamations starting with and ending with '!'
+
+		OR
+			sed 's/!\+/./g' msg.txt 	('\' we need to incarcinate the special meaning of '+', whereas we don't need to do that in * or ?)
+		OR
+			sed -r 's/!+/.g/' msg.txt
+			(sed -r is like egrep)
+
+	(4) sed -r 's/(\b[^ ]*\b) (\b[0-2][0-9]\b|\b3[0-1]\b), (\b[0-9]{4}\b)/\2 \1/g' appointment.txt
+		
+		or you can also do sed -E
+
+Q.4 
+	(1) awk 'BEGIN {count=0} {count++;} END { print "Total number of lines are: ",count;}' sample.txt 
+
+	(2) awk 'BEGIN {count=0}{ if($2 ~ 515042969) count+=$3 } END {print count}' sample.txt 
+		OR awk 'BEGIN {count=0}{ if($2==515042969) count+=$3 } END {print count}' sample.txt
+
+	(3)  awk 'BEGIN {count=0}{ if($2 ~ 515042969) count+=$3*$10 } END {print count}' sample.txt
+	                                      OR
+		 awk '{if($2==515042969) print $3}' sample.txt |sort -n|awk 'BEGIN{a=$1} { b=$1;if(a!=b) count++;a=b} END {print count}' 
+
+
+	(4) awk '{ if ($11 ~ 1) print $0 }' sample.txt
+
+	(5) awk '{if($8>0.001 && $8<0.009) print $0}' sample.txt
+		awk '{if($8>=0.001&&$8<=0.009) count++;print $0} END {print count}' sample.txt
+		- It will print all these lines as well
+
+
+	(6) awk 'BEGIN {count=0}{ if(length($0) > max) max=length($0) } END {print max}' sample.txt
+
+	(7) awk 'NR==100,NR==200 {print NR,$2,$8,$9,$10}' sample.txt
+
+	(9) awk '{{if(NR%100==1) {x="file"++i".txt";print>x} else {print>x}}' sample.txt'
+		OR
+		awk 'NR%100==1{x="file"++i".txt"}{print>x}' sample.txt
+
+	(10) awk '{$1=++i FS $1; print}' sample.txt >> a.txt
+
+-F, is not required for splitting in awk
+It was a mistake earlier 
