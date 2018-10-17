@@ -1,0 +1,43 @@
+Q.1   make a file iitg.txt
+	  add something in it
+	  then sccs create iitg.txt(this is ver 1.1)
+	  do sccs edit iitg.txt
+	  ver 1.2
+	  sccs delta to save the changes
+	  do it 5 times
+
+Q.2	  write sccs cdc -r1.3 iit.txt(it will append the .txt file)
+
+Q.3 do sccs get -m -p iitg.txt | grep '^1.4'
+
+Q.4 sccs delget iitg.txt
+
+Q.5 sccs get -c"18/08/18 17:00:00" iitg.txt
+
+Q.6 sccs edit -x1.2,1.4 iitg.txt
+
+Q.7
+ see the makefile of problem7
+
+Q.14
+
+	(2) Set up the breaker at getinputs function, get the input values --> after inputting the values, just write
+		display PI
+		display length
+		etc. etc.
+
+		Now to log the details of display, do set logging on
+		Then display
+		Then set logging off
+		All the text would go in the file gdb.txt
+
+	(3) to delete the display of specific items, write delete display <itemnumber>
+		(Ex: if radius is at 1, write delete display 1)
+
+		suppose you wanna log the display to a.txt
+		write set logging on a.txt
+		display
+		set logging off
+
+	(4) keep doing step, see the change in values of display
+ 

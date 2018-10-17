@@ -1,0 +1,28 @@
+											GDB PART
+
+
+Q.12
+	1. write in gdb, --->  (gdb) run > <filename> (here both input and output will be logged)
+	   see the outfile for the details
+	2. use b <linenumber>(where you wanna stop your program) and then use run
+	3. IDK about this but I think you just want to write r in the gdb window
+	4. After the output, the program terminates and that's why it is showing Inferior 1 process exited normally
+		-> had it not been the end of program, it would have continued executing program like run
+
+Q.13
+	
+	First set breaker at main(by using `b main`)
+	Now do run , the gdb will run and stop at the main, now do next and the gdb stops at next line
+	Then do next, and get stops at getInput function, then do next and gdb will ask for the inputs and move on to the 
+		surface area line, at this time if you display radius, it shows correct, but if you show SurfaceArea it shows some garbage value
+	Leave it and do next, and move on to curved surface area, if you display curved surface area it will show correct and now if you display SurfaceArea it will be showing correct while initially it was not
+
+		enter l and it will show code around 10 lines of our current point
+		You will see the flaw there:
+
+		surfaceArea = curvedSurfaceArea + PI * radius * radius;
+	    curvedSurfaceArea = PI * radius * length;
+
+	    CSA is defined after SA, so SA can't give answer unless CSA answers 
+
+Q.14 

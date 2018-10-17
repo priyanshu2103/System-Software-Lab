@@ -1,0 +1,10 @@
+Starting program: /home/priyanshu/Desktop/System software lab/Lab 2/a.out 12 23 43
+
+Breakpoint 1, DisplayOutput (H=0, R=4.6355705384519112e-310, L=0, ca=0, 
+    sa=4.6355705384481069e-310, vol=0) at cone.cpp:42
+42	  cout << "Height of cone is " << H << " inches\n";
+Starting program: /home/priyanshu/Desktop/System software lab/Lab 2/a.out 12 23 43
+
+Breakpoint 1, DisplayOutput (H=0, R=4.6355705384519112e-310, L=0, ca=0, 
+    sa=4.6355705384481069e-310, vol=0) at cone.cpp:42
+42	  cout << "Height of cone is " << H << " inches\n";

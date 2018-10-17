@@ -1,0 +1,165 @@
+Q.1 Just do ls -p -r | grep -v / (here -v is done to invert the sense of matching, match with all that does not contain /)
+
+Q.2 rm file1.txt file2.doc
+
+Q.3  ls example*.txt
+
+Q.4 cp `grep -lr "hello" <where you want to search the expression>(/home/cse/Documents)` <where you wanna put all these files>(/home/cse/Desktop)
+
+Q.5 ls --ignore="*[a,z]"
+
+Q.6 du -h(only directory)
+	du-ah(directories ke andar ka files and all)
+
+Q.7 wc -c file* --> counting number of characters  (or wc -c *.c)
+    wc -w file* --> counting number of words
+
+Q.8 
+
+	part1=  go in the root by sudo su
+		
+		groupadd <groupname>(group1)
+		useradd -d /home/abhishek(directory will be made by me) -g group1 -m <username>(abhishek)
+		passwd abhishek(to set the password)
+
+	part2= to record home directly
+		make a file file1.txt
+		cat /etc/passwd| grep abhishek>>file1.txt (home directly will be written in abhishek)
+		id abhishek>>file1.txt( to store id and group)
+
+	part3= useradd -d /home/abhishek/second_home_user -g group1 -m rishi(and previously do the follow up commands)
+
+	part4= just use the follow up commands
+		to record, ls -al | cat>>record.txt
+
+Q.9
+
+	part1= usermod -l <newname> <oldname>
+	part2= groupmod -n <newname> <oldname>
+	part3= usermod -d <newDir>(oldDir will be overwritten) -m <username>(the name of user whose id you wanna change)
+	part4= cat /etc/passwd file open...
+		
+		cse:x:1001:1001:Priyanshu:/home/cse:/bin/bash (this /bin/bash is shell)
+
+		usermod -s /home/nologin <username>(sakshi)
+
+	To remove an user from a secondary group without removing the group, use deluser <username> <groupname>
+
+	usermod -g <groupname> --> changes default group, old group is removed from groups of user
+	usermod -a -G --> add new groups to user, old secondary groups remain intact
+	usermod -G --> add new groups to user, old gets deleted
+
+Q.10
+
+	part1= userdel sakshi
+	part2= userdel -r rishi(deletes even directory)
+	part3= groupdel <groupname>
+
+	$(split -b 1K $(tar -cf bug.tar file*) bug.tar gu) cat gu*>/home/cse/iitg
+
+Q.11 cat /var/log/syslog --> to see syslog
+
+	cat /var/log/syslog| grep ssh>>file.txt
+	
+	cat /var/log/auth.log --> to see login details(failed password attempt will result in authentication failure)
+
+
+Q.12 part1-->  tar -tf <filename>.tar
+
+     part2-->  split the file using   split -b  10K(or any file size you want) filename "name you want(let it be gu)"
+	       then to join these parts cat gu*> <filename>(let it be lecture 1).tar( it will again join these split files in a new tar)
+	       tar -xvf <filename>(ex:lecture1.tar) -C <directory>(/home/cse) --> extract in a specific directory
+
+	part2 ek command line mein
+
+	OR
+	
+	split -b 1K $(tar -cf bug.tar file*) bug.tar gu --additional-suffix=.tar 
+	Instead of cat
+	tar -Af <newfilename> gu* 
+
+Q.13 
+
+	part 1:	
+
+	PARTED:
+		go into root
+		lsblk--> see all the partitions(including pen drive)
+		umount /dev/sdbx - unmount each partition of pendrive individually(if 3 partiton umount 3 times)
+		go and see in lsblk -- mountpoint will be gone in /dev/sdbx
+		
+		type parted(it's a application for doing partition)
+		by default it will be /dev/sda
+		select /dev/sdb --> to change into drive(the pen drive drive)
+		do print(it will partition table)
+		mklabel/mktable--> partition table and partition is gone
+		mkpart--> make new partition table, fat32 or ext2
+		table type is gpt(aka gupta)
+		
+		resizepart--> only end will change
+		rm --> remove partiton
+		unit--> select the unit in which u wanna show the partition size
+		if after resizepart we put end at some negative no--> we get completely to the end
+		
+
+	FDISK(hard drive partiton making tool):
+
+		each sector made is of 1/2 kb, tell the start sector, and tell the end sector
+		no resize option is present
+		Until and unless you write in fdsik(by command w),there will be no changes in drive
+
+	MKFS(make file system/ format job):
+		
+		mkfs.vfat(vfat is format type|| ntfs is another) /dev/sdbx(format each partition individually)
+
+		for mke2fs use ext2(ex: mke2fs /dev/sdbx , no need to do something with dot)
+
+	
+Q.15 
+	PART1:
+	dd if=(space mat de idhar)<address>(ex: /home/cse/Desktop/<filename>.iso) of=<address of sdb> bs=1M(ex: /dev/sdb)
+	'if' here is input, of being output
+
+	PART2:
+	replace if with of
+	dd if=/dev/sdcx of=/home/cse/Desktop/aspgu.iso bs=1M(this bs thing is optional-->it increases the speed of the process)
+
+	PART3:
+
+	DO ALL THIS IN ROOT
+
+	mkdir /media/iso(go to media by cd .., then again see ls)	
+	ToMount--->	mount -o loop <location where media iso is(part2 mein jo of tha)>(ex:/home/cse/Desktop/arpgu.iso) /media/iso
+
+	UnMOunt--->     umount /media/iso/ (do it from home,,, like after wherever u are, do cd and then do this)
+
+Q.16
+	command to make softlink -->
+
+	ln -s <address of folder whose softlink is to be created>(ex: /home/cse/Desktop/CS110 <filename>(ex: newname)
+
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

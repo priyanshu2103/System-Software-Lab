@@ -1,0 +1,199 @@
+			SCCS
+
+
+1.files in the SCCS direcctory are called s-files and thir names begin with s.filename
+2.delta is like version i.e.for making new delta we edit the file .
+3.when we use sccs edit quit.c ,in SCCS directory we get s.quit.c and p.quit.c which means that the file is out for editing and pulls the file out.
+4.by default history file resides in SCCS directory
+5.output of create gives name,version number and number of lines
+6.comma file is used as a backup for the original file , if we lose original file
+7. use 'get' to get latest version of your file from s.quit.c
+8. edit check out a writable version
+9.prt display version log including comments
+10.to edit a source file you have to check it out using sccs edit
+11. having made changes you can check  in using delta
+12.find out your pending changes using diffs (sccs diifs iitg.txt) 
+13.sccs unedit backs out pending changes and retrieves read only of most recent version
+14.delget =del+get
+
+15.sccs get <iitg.txt> -k -Gfilename(suppose copy.txt)
+	we will get a copy of iitg.txt in copy.txt which will be free from version control
+
+16.sccs prt quit.c gives information about all the changes
+17.sccs cdc -r1.x quit.c can add comment to 1.x verion of the file(it will append the original comment)
+18.to check differences between two checked in versions sccs sccsdiff -r1.1 -r1.2 quit.c
+19.to display entire display sccs -m -p quit.c
+
+20.prs prints all information on the terminal in user format
+	Iis defined as the data keyword replaced by the SID of a specified delta.
+	:F:is the data keyword for the SCCS filename currently being processe
+	:C:is the comment line associated with a specified delta
+	prs -esubstitutes data keywords for the SID designated by means of-rand all deltas 	created earlier, while prs -l substitutes data keywords for the SID designated by 	means of -r and all deltas created later.
+
+21. Getting a version, sccs get -r1.x <filename>
+22. sccs get -c"88/07/22 12:00:00" program.c(file made on 22/07/1998 at 12 am time)
+
+23. How to use ID
+
+	- do sccs edit iitg.txt
+	- echo "%M%">> iitg.txt  (%M print name of text file)
+	- similarly there are many IDS
+
+24. sccs what iitg.txt(tells the current version you are working with)
+
+
+
+->only one user at a time can modify
+->
+
+
+->sccs subcommands
+-create
+-edit
+-delta (delta stores the diff in prev version and new)
+-get (read-only version)
+-prt            0001/0000/0002 (lines inserted, lines deleted, lines unchanged)
+
+Note : if the third arguement is a directory, then the command runs for each s.file in that directory
+->version and delta aren't same, it is possibe to retrieve a version which excludes certain deltas (find out how)
+
+->SID : x.y
+
+	x = release number
+	y = level number
+
+->keywords eddited into a file (seen when we cat after doing get)
+%I% = version number
+%C% = ?
+%M% = name of the source file
+%E% = current date
+%G% = date of the latest delta applied
+%W% = includes the filename,the SID, unique string @(#) in the file 
+
+Note : sccs edit == sccs get -e iitg.txt
+
+while checking in with delta - it asks for comments
+			- if you want to add multiple lines of comment add a backslash \
+			eg.
+			comments ? You are awesome \
+				   and smart
+format of output after delta -
+	
+			//version number
+			//no. of lines inserted
+			//no. of lines deleted
+			//no. of lines unchanged
+
+-> in sccs diffs :
+			4c4 - means that 4th line has been changed
+			4a5 - 4th line is appended to line 5
+
+		//uske baad changes,if any, print hote hai
+
+	sccs diffs -C filename
+		//prints date and time of latest modif and latest delta
+		//also prints x1,y1 and x2,y2 where y1 - number of lilnes in prev submission and y2 - num. of lines in editted (not submitted) version
+		//don't know what x is.
+
+-> sccs unedit - deletes all edit done after last delta and retrives a read only file of the last submission
+	       - to edit again, we have to 'sccs edit filename'  
+
+
+	       															MAKEFILE
+
+
+1. g++ main.cpp by default creates a executable by the name of a.out
+   but if we do g++ main.cpp -o hello  it will make an executable by the name hello
+
+2. g++ -c main.cpp tells the compiler to compile main.cpp but no create a executable file, this file is made by the name of main.o 
+
+3. by using touch, we can update the timestamp of these . files without going to edit them to use make again(touch updates the timestamp)
+
+4. to compile each .c file to it's corresponding .o file, we can write %.o: %.c( and in the next tab line add gcc -c $*.c($* means current))
+
+5. $@ means the target of the current rule
+   $^ means all the prerequisites of this target(i.e dependencies)
+   $< means the first requisite
+   $? means all the prerequisistes that are out of date
+
+6. pattern rules does not make dependencies, they do something if dependencies exist
+
+7. % is a make wildcard, it matches the same thing on the left as it does on the right while * is a shell wildcard, it matches all the strings
+
+8. if we are using more than one pattern rules, make only uses the first pattern rule and ignores the other rule
+
+
+
+9. 														VARIABLE DECLARING IN MAKEFILE
+	
+	-CC =g++ (variable CC which tells which compiler we are using)
+	CFLAGS = -c -Wall ( tells to do -c and give warning)
+	gcc -c main.cpp ---> can be executed by  $(CC) $(CFLAGS) main.cpp
+
+10. 
+
+	Suppose we have a dat1.c depend on some 100 files, but during action I need to write stats.py $^ (i.e. stats.py and all the files), but we can't write stats.py in dependency list as in $^ it will come twice
+	 so we make a false dependency
+
+	 data1.c: stats.py
+	 	touch $@
+
+	 what it will do is that the time stamp of data1.c changes, so whenever stats.py changes, data1.c is compiled again
+
+	 OR
+
+	 data1.c: data1-*.dat
+	 	stats.py $@ $^
+	 data1.c : stats.py (just dependency will do nothing, when make sees two dependencies, it will take union of those dependencies and do required action)
+
+
+
+
+	 													DEBUGGING
+
+Q.12
+	1. write in gdb, --->  (gdb) run > <filename> (here both input and output will be logged)
+	   see the outfile for the details
+	2. use b <linenumber>(where you wanna stop your program) and then use run
+	3. IDK about this but I think you just want to write r in the gdb window
+	4. After the output, the program terminates and that's why it is showing Inferior 1 process exited normally
+		-> had it not been the end of program, it would have continued executing program like run
+
+Q.13
+	
+	First set breaker at main(by using `b main`)
+	Now do run , the gdb will run and stop at the main, now do next and the gdb stops at next line
+	Then do next, and get stops at getInput function, then do next and gdb will ask for the inputs and move on to the 
+		surface area line, at this time if you display radius, it shows correct, but if you show SurfaceArea it shows some garbage value
+	Leave it and do next, and move on to curved surface area, if you display curved surface area it will show correct and now if you display SurfaceArea it will be showing correct while initially it was not
+
+		enter l and it will show code around 10 lines of our current point
+		You will see the flaw there:
+
+		surfaceArea = curvedSurfaceArea + PI * radius * radius;
+	    curvedSurfaceArea = PI * radius * length;
+
+	    CSA is defined after SA, so SA can't give answer unless CSA answers 
+
+Q.14
+
+	(2) Set up the breaker at getinputs function, get the input values --> after inputting the values, just write
+		display PI
+		display length
+		etc. etc.
+
+		Now to log the details of display, do set logging on
+		Then display
+		Then set logging off
+		All the text would go in the file gdb.txt
+
+	(3) to delete the display of specific items, write delete display <itemnumber>
+		(Ex: if radius is at 1, write delete display 1)
+
+		suppose you wanna log the display to a.txt
+		write set logging on a.txt
+		display
+		set logging off
+
+	(4) keep doing step, see the change in values of display
+ 
