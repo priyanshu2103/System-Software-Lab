@@ -17,3 +17,61 @@
 	COMMENT
 	(This will make multiline comments)
 	For single line comments we have #
+
+	OR
+	you can use
+
+	: '
+	comment
+	comment
+	comment
+	'
+
+6. NAME[0]=""
+	NAME[1]=""
+	In this way you can declare an array
+	echo $(NAME[0]) to print the first element of array
+	If you want to print all elements of array, do echo $(NAME[*]) or echo $(NAME[@])
+
+7. echo -n lets echo avoid printing a new line character.
+
+8. The break command can also be used to exit from a nested loop using this format −
+	break n
+	Here n specifies the nth enclosing loop to the exit from.
+
+9. read -sp 'password': pass_word
+	-s will hide our input(for passwords vagerah we use)
+	read -p will help us to give the input in same line as of 'password' 
+
+   read -a will take the input and store it in array
+
+10. To pass the input parameters as an array, just do
+	arr=("$@")
+	echo $# tells the number of arguments passed
+
+11. 
+	if [condition]
+	then
+	    statements
+	fi
+	            
+	if using [] use -eq -gt and so on else if using < ... use (( )) for numbers
+
+12. When comparing using <,>,<=,>= we need to use double curve brackets(if not string) and we need to use double square brackets(if using string)
+
+13. Arithmetic operations:
+	Use echo $((num1+num2)) to add
+	OR use echo `expr $num1+$num2`
+
+14. USING CASE
+	
+	case expression in
+		pattern1 )
+			statements ;;
+		pattern2 )
+			statements ;;
+		* ) --> default case
+			statements ;;
+	esac
+
+15. ? expects any one letter special character
