@@ -1,5 +1,5 @@
 # !/bin/bash
-num=$[ ( $RANDOM % 20 )  + 1 ]
+num=$[( $RANDOM % 20 )  + 1 ]
 
 i=0
 while ((i<3))

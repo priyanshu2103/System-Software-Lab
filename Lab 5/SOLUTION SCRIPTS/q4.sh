@@ -6,13 +6,13 @@ read char
 
 case $char in
 	"+" )
-	echo " $num1 + $num2 " | bc ;;
+	echo  $num1 + $num2  | bc ;;
 	"-" )
-	echo "$num1 - $num2" | bc ;;
+	echo $num1 - $num2 | bc ;;
 	"*" )
-	echo "$num1 * $num2" | bc ;;
+	echo $num1 * $num2 | bc ;;
 	"/" )
-	echo "$num1 / $num2" | bc ;;
+	echo $num1 / $num2 | bc ;;
 	* )
 	echo Unknown operation
 esac

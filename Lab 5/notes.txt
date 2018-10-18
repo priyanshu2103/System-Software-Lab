@@ -32,6 +32,10 @@
 	In this way you can declare an array
 	echo $(NAME[0]) to print the first element of array
 	If you want to print all elements of array, do echo $(NAME[*]) or echo $(NAME[@])
+	echo $(!os[@]) will print the indexes of the array
+	echo $(#os[@]) length of array
+
+	unset os[2] :- removes the element at index 2, array is not rearranged, position 2 remains empty
 
 7. echo -n lets echo avoid printing a new line character.
 
@@ -75,3 +79,13 @@
 	esac
 
 15. ? expects any one letter special character
+
+16. for i in {START..END..INCREMENT}
+	Ex: {1..10..2}
+	Gives 1,3,5,7,9
+
+	Or 
+	for ((i=0;i<5;i++))
+	do
+		<command>
+	done
