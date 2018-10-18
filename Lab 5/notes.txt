@@ -1,0 +1,19 @@
+											SHELL SCRIPTING
+
+1. We start the scripting by # !/bin/bash(called the shebang construct)
+
+2. readonly OYE
+	This variable by the name 'OYE' will be readonly, means the initial value that it was assigned will not change
+
+3. UNSETTING OF A VARIABLE
+	Unsetting or deleting a variable directs the shell to remove the variable from the list of variables that it tracks. Once you unset a variable, you cannot access the stored value in the variable. 
+	You cannot use the unset command to unset variables that are marked readonly
+
+4. ENVIRONMENT AND SHELL VARIABLES
+	Standard UNIX variables are split into two categories, environment variables and shell variables. In broad terms, shell variables apply only to the current instance of the shell and are used to set short-term working conditions; environment variables have a farther reaching significance, and those set at login are valid for the duration of the session. By convention, environment variables have UPPER CASE and shell variables have lower case names.
+
+5. <<COMMENT
+	write your script
+	COMMENT
+	(This will make multiline comments)
+	For single line comments we have #
