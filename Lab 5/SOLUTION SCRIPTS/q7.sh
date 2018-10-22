@@ -2,7 +2,7 @@
 #part 1
 echo enter the file to be searched
 read file
-if [ -e  "$1/$file" ]
+if [ -e "$1/$file" ]
 then 
     echo file exists
 else
