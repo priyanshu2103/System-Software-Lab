@@ -1,1 +1,1 @@
-cp $1 newfile.sh
+cp $1 copy

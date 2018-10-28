@@ -1,19 +1,3 @@
-#! /bin/bash
-#part 1
-echo enter the file to be searched
-read file
-if [ -e "$1/$file" ]
-then 
-    echo file exists
-else
-    echo file does not exists
-fi
-#part2
-len=$(find $1 | wc -l)
-len=$(($len-1)) #-1 because find shows current directory also
-echo $len
-#part3
-cd $1
-rm *.c
-#part 4
-find $1 -type f -size 0b -delete
+# find /home/priyanshu/System-Software-Lab/Lab\ 5/SOLUTION\ SCRIPTS -name q1.sh
+# If I want to search q1.sh
+ls | wc -l

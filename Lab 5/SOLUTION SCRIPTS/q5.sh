@@ -1,5 +1,5 @@
 # !/bin/bash
-num=$[( $RANDOM % 20 )  + 1 ]
+num=$[( $RANDOM % 20 ) + 1 ]
 
 i=0
 while ((i<3))
@@ -13,6 +13,7 @@ do
 		echo You entered a larger number bro
 	else
 		echo GOTCHA
+		break;
 	fi
 	i=$(($i+1))
 done
