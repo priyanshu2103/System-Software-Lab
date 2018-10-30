@@ -25,3 +25,6 @@ To call the function, write
 	local name=$1
 }
 	this will make name variable only local to the function, it can not be used in a program someplace else
+
+5. $$ will tell the pid number of the script
+6. If in a loop, I write sleep 10 => it means statements of loop will wait for 10s before executing in each turn
