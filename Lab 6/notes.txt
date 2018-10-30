@@ -1,0 +1,27 @@
+1. function name(){
+	Commands
+}
+This makes a function in shell script
+To call this function we write
+
+name
+
+
+2. <function name> (){
+	Commands
+}
+To call the function, write
+<function name>
+
+3. Passing an argument
+	print(){
+		echo $1 $2
+	}
+
+	now to call the function, write
+	print Hello World(it will take Hello as $1,World as $2)
+
+4. print(){
+	local name=$1
+}
+	this will make name variable only local to the function, it can not be used in a program someplace else
