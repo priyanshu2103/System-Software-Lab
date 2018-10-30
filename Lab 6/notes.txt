@@ -28,3 +28,20 @@ To call the function, write
 
 5. $$ will tell the pid number of the script
 6. If in a loop, I write sleep 10 => it means statements of loop will wait for 10s before executing in each turn
+
+7. kill -9 <pid number>
+It will kill the process with pid 3784
+
+8. trap "echo got you signal!!" <signal number>
+
+	When a particular signal is caused, trap will echo got you ..
+	Ex: trap "echo hoiho" SIGINT (this is ^C)
+	Ex: trap "rm lol.txt" SIGINT (this is ^C)
+		- will remove lol.txt
+	trap can't catch SIGKILL/SIGSTOP!!! (exceptions)
+
+
+9. trap command tells all the traps set up in files in the directory
+	To delete some traps
+	Write trap - 0 2 15
+	(It will remove trap associated with signal 0,2,15)
