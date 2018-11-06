@@ -1,0 +1,12 @@
+1. WHAT IS SWAP SPACE
+	Swap space in Linux is used when the amount of physical memory (RAM) is full. If the system needs more memory resources and the RAM is full, inactive pages in memory are moved to the swap space. While swap space can help machines with a small amount of RAM, it should not be considered a replacement for more RAM. Swap space is located on hard drives, which have a slower access time than physical memory.
+
+2. FREE COMMAND
+	-> free displays the details of memory related to your system
+	-> without any flag, it shows swap memory and physical memory details (see man free)
+	-> free -s5 will display comments continously after every 5 seconds
+
+3. DF COMMAND
+	df command that displays the amount of disk space available on the file system containing each file name argument.
+	df <filename>
+		-tells disk space on the file system that contains this file
