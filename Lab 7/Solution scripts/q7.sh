@@ -11,4 +11,6 @@ do
     let COUNT=COUNT+1
 done
 mv out*.pdf multiple_pdf
-mv multiple_pdf home/success
+cd multiple_pdf
+mkdir /home/priyanshu/success
+mv * /home/priyanshu/success	
