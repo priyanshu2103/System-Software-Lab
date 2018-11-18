@@ -1,0 +1,125 @@
+Q.1 
+	(1) Do ls -Rl | grep "rwxrwxrw" (-R will do all the files recursively, and search for the given permission)
+
+	(2) ls -l | grep -w "Aug" | wc -l ( word count to count the number of lines)
+		OR
+		grep -c <pattern> <filename> (tells the number of times pattern is matched)
+
+	(3) ls -s | egrep "[0-9]{4,} "
+		ls -s | grep "[0-9]\{4,\} "
+
+		egrep is extended regular expression, to use special meaning of curly brackets in grep we need to do backslash 
+
+
+	(4) ls -l | grep -v -w Sep | wc -l (-v just inverts the matching, all except September)
+
+Q.2 
+	(1) grep "z.a" words.txt OR grep "z[a-z]a" OR grep "z[^p]a"(in square brackets ^ means if you want to ignore some specific pattern, can also write multiple patterns like ^gw) (if you wanna ignore all patterns with p in middle of z and a)
+
+	(2) grep -e "apple" -e "papaya" -e "kiwi" words.txt (for searching multiple strings)
+		OR grep -E "apple|papaya" words.txt
+		OR egrep "apple|papaya" words.txt
+
+	(3) grep ^abid words.txt (^ in starting means match all words that begin with abid) 
+
+	(4) grep ever$ words.txt ($ matches the pattern at the end of file)
+
+	(5) grep "[a,e,i,o,u][a,e,i,o,u][a,e,i,o,u][a,e,i,o,u]" words.txt 
+		OR egrep "[a,e,i,o,u]{4}" words.txt
+		OR grep "[a,e,i,o,u]\{4\}" words.txt
+
+	(6) grep "^........$" words.txt | sort -r (note that here the carat is necessary, sort -r will print the searched result in reverse alphabetical order)
+		OR egrep "^.{8}$" words.txt | sort -r
+
+	(7) grep - "^[n,m].*oon" words.txt
+		* means predecessor wala (. matches zero or more dots)
+
+		-->  .* matches zero or more than one characters, Ex: noon as well as njkoon will be searched
+
+Q.3
+	(1) sed 's/ernet.in/ac.in/g' email_old.txt > email_new.txt
+
+	(2)  sed 's/\bpublic\b/private/g' QuizProgram.java > QuizProgram_new.java
+		\bpublic\b (\b will match the exact word)
+
+	(3)  sed 's/!*!/./g' msg.txt > new_msg.txt
+			!*! will take all the exclamations starting with and ending with '!'
+
+		OR
+			sed 's/!\+/./g' msg.txt 	('\' we need to incarcinate the special meaning of '+', whereas we don't need to do that in * or ?)
+		OR
+			sed -r 's/!+/.g/' msg.txt
+			(sed -r is like egrep)
+
+	(4) sed -r 's/(\b[^ ]*\b) (\b[0-2][0-9]\b|\b3[0-1]\b), (\b[0-9]{4}\b)/\2 \1 \3/g' appointment.txt
+		
+		or you can also do sed -E (same functionality as sed -r)
+
+	(5) sed -n '/iitg/!p' hello.txt 
+		This will print all the lines except the line that matches the pattern iitg
+
+	(6)
+
+		(a) sed '/10.[3-5]/!d' comm_ind_wi_day3_second_ings.txt
+		(b) sed -n '/10.[3-5]/!p' comm_ind_wi_day3_second_ings.txt
+		(c) sed '5!d' comm_ind_wi_day3_second_ings.txt  (!d means do not delete)
+		(d) sed '$!d' comm_ind_wi_day3_second_ings.txt 
+		(e) sed '9,$!d' comm_ind_wi_day3_second_ings.txt 
+		(f) sed '9,11 s/Ashwin/jadeja/g' comm_ind_wi_day3_second_ings.txt 
+
+	(7) sed 's/I/We/2' msg.txt 
+
+	(8)  sed -r 's/(\b[0-9]{9}\b)(|\t)([^0-9]*)(|\t)(\b[0-9]{2}\b)/Roll: \1 Name: \3 Age: \5/g' sed_practice.txt (\t matches 	the spaces)
+
+	(9) sed -e 's/1/one/g' -e 's/2/two/g' -e 's/3/three/g' digit_word.txt
+
+	(10) sed -i '/[a,A,e,E,i,I,o,O,u,U]/!d' vowel_fav.txt   (-i flag is used to make permanent change in the file)
+
+	(11)
+
+	(12)  sed -i '/@/d' digits.txt 
+
+Q.4 
+	(1) awk 'BEGIN {count=0} {count++;} END { print "Total number of lines are: ",count;}' sample.txt 
+
+	(2) awk 'BEGIN {count=0}{ if($2 ~ 515042969) count+=$3 } END {print count}' sample.txt 
+		OR awk 'BEGIN {count=0}{ if($2==515042969) count+=$3 } END {print count}' sample.txt
+ 
+	(3)  awk 'BEGIN {count=0}{ if($2 ~ 515042969) count+=$3*$10 } END {print count}' sample.txt
+
+	(4) awk '{ if ($11 ~ 1) print $0 }' sample.txt
+
+	(5) awk '{if($8>0.001 && $8<0.009) print $0}' sample.txt
+		awk '{if($8>=0.001&&$8<=0.009) count++;print $0} END {print count}' sample.txt
+		- It will print all these lines as well
+
+
+	(6) awk 'BEGIN {count=0}{ if(length($0) > max) max=length($0) } END {print max}' sample.txt
+
+	(7) awk 'NR==100,NR==200 {print NR,$2,$8,$9,$10}' sample.txt
+
+	(8) awk '{if($7<=0) print>"sample0.txt";else print>"sample1.txt"}' sample.txt
+
+	(9) awk -F, '{{if(NR%100==1) {x="file"++i".txt";print>x} else {print>x}}' sample.txt'
+		OR
+		awk -F, 'NR%100==1{x="file"++i".txt"}{print>x}' sample.txt
+
+	(10) awk '{$1=++i FS $1; print}' sample.txt >> a.txt
+		OR
+		awk '{$1=++i ; print}' sample.txt >> a.txt
+
+	(11) awk '{for(i=NF;i>0;i--){printf $i" "};printf "\n"}' sample.txt 
+		The "printf()" (formatted print) function is much more flexible
+
+
+	(12) awk '{if(length($0)>max) {max=length($0); y=$2}} END {print y}' sample.txt 
+
+	(14) awk '{a[$0]++} END {for(i in a){print i, a[i]}}' days.txt
+
+	(15) awk '{print|"sort -u"}' line.txt
+
+		OR you can do
+		awk '{print}' line.txt | sort -k1
+		-k1 will sort ascending on the basis of first field, while for example -k2 will sort on the basis of 2nd field 
+
+

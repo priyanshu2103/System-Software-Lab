@@ -33,7 +33,7 @@
 
 		grep "t[to]o" <filename>  will match 'too' or 'tto'
 
-	--> grep "[^c]ode" <filename>  will match .ode but not 'code'
+	--> grep "[^c]ode" <filename>  will match .ode but not 'code' (i.e. ^ inside a braket will ignore all texts)
 
 
 	?	The question mark indicates zero or one occurrences of the preceding element. For example, "colou?r" matches both 		"color" and "colour".
@@ -48,6 +48,8 @@
 
 
 4. 													On command SED
+
+	By default sed only replaces first instance of replacement word in each lines
 
 
 	--> sed 's/unix/linux' geekfile.txt 
@@ -89,6 +91,10 @@
 
 	--> sed -i 's/a/d/g' <filename> will make permanent changes in file, while all other sed commands do not change the file, 	  they just show what the changed output will be if me send that sed in some other file
 		Ex: sed 's/a/b/g' <filename> >> <newfile>
+
+
+		sed -e 's/.../.../;t;d'
+		This will replace pattern and delete all lines that do not contain the pattern (t here without label deletes all the following commands and d deletes the line)
 
 
 											5. How to use AWK

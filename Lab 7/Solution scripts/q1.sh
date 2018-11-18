@@ -1,4 +1,4 @@
-echo  Time'\t'Memory'\t'Disk'\t'CPU	
+echo Time'\t'Memory'\t'Disk'\t'CPU	
 for((i=0;i<=60;i+=5))
 do
 	
