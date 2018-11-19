@@ -150,3 +150,8 @@
 
 			If you want to print 2 things in awk, do it like print<thing1>, print<thing2>
 			
+	-->  awk 'BEGIN{OFS=":";}{print $1,$2}' sample.txt  (called output field separator)
+		Here the output file will be displayed by having ":" as separating medium instead of white space
+
+	--> awk 'BEGIN{FS="|";OFS="\t";}{print $1,$2,$3,$4,$5}' ofs_fs.txt 
+		SEE ofs_fs.txt and this upper command to see avout OFS and FS
