@@ -13,3 +13,13 @@
 	Q.11 sed 's/Apple iphone/samsung s8/3; s/Apple iphone/samsung s8/5' mobile_reviews.txt 
 		- why is it changing every word 3 to 5, and not just 3 and 5
 	and how to replace only 3rd and 5th instance in a file
+
+4. AWK Q.3
+
+5. AWK Q.10
+
+6. AWK Q.11
+
+7. AWK Q.15 --> without using the sort
+
+8. How to read an array, I mean the input you are giving in command line/in terminal stored in array

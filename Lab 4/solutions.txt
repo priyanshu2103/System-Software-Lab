@@ -97,6 +97,8 @@ Q.4
 		OR awk 'BEGIN {count=0}{ if($2==515042969) count+=$3 } END {print count}' sample.txt
  
 	(3)  awk 'BEGIN {count=0}{ if($2 ~ 515042969) count+=$3*$10 } END {print count}' sample.txt
+			OR
+			awk '{if($2==515042969) print $3}' sample.txt |sort -n|awk 'BEGIN{a=$1} { b=$1;if(a!=b) count++;a=b} END {print count}' 
 
 	(4) awk '{ if ($11 ~ 1) print $0 }' sample.txt
 
@@ -124,6 +126,8 @@ Q.4
 
 
 	(12) awk '{if(length($0)>max) {max=length($0); y=$2}} END {print y}' sample.txt 
+
+	(13) awk '{for(i=1;i<=NF/2;i++){temp=$i;$i=$(NF-i+1);$(NF-i+1)=temp;}print;}' sample.txt
 
 	(14) awk '{a[$0]++} END {for(i in a){print i, a[i]}}' days.txt
 

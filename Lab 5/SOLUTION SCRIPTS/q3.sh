@@ -9,7 +9,7 @@ echo Sum of four numbers are `expr $n1 + $n2 + $n3 + $n4`
 '
 #
 ########################################### PART 2 ####################################################################
-<<COMMENT
+# <<COMMENT
 if [ $# -eq 0 ]
 then
 	echo Both arguments missing
@@ -19,7 +19,7 @@ then
 else
 	echo Sum of these 2 numbers are `expr $1 + $2`
 fi
-COMMENT
+# COMMENT
 ################################################## PART 3 #################################################################
 sum=0
 for i in $@

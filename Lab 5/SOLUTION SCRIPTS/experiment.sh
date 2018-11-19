@@ -1,5 +1,1 @@
-
-while read p
-do
-	echo $p
-done < 
+dir=$1

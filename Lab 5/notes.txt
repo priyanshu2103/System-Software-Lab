@@ -1,5 +1,7 @@
 											SHELL SCRIPTING
 
+compgen -c tells all the linux commands available to you
+
 1. We start the scripting by # !/bin/bash(called the shebang construct)
 
 2. readonly OYE
@@ -37,7 +39,12 @@
 
 	unset os[2] :- removes the element at index 2, array is not rearranged, position 2 remains empty
 
-7. echo -n lets echo avoid printing a new line character.
+7.  echo -n lets echo avoid printing a new line character.
+	echo -e lets us use the '\' characters...They are useful in printing tab space in script
+	Ex: echo -e '\t' adios amigos
+	Ex: echo -e "Enter your name: \c"
+		echo Priyanshu
+		These above set of arguments will give ans as Enter your name: Priyanshu
 
 8. The break command can also be used to exit from a nested loop using this format −
 	break n
@@ -90,4 +97,33 @@
 		<command>
 	done
 
-17. 
+17.  
+
+USE MAN TEST --> IT'S A SAVIOR
+
+Syntax to find out if file exists with conditional expressions in a Bash Shell
+-e: Returns true value if file exists.
+-f: Return true value if file exists and regular file.
+-r: Return true value if file exists and is readable.
+-w: Return true value if file exists and is writable.
+-x: Return true value if file exists and is executable.
+-d: Return true value if exists and is a directory.
+-s: Check if a file is empty or not
+
+18. inside if -e if file exists or not -f for regular file -d for directory -s if file is empty -b for block file -c for character file
+for permissions use -r -w -x
+
+19. Length of a string in bash
+	${#p}
+	where p is string name
+
+20. FIND COMMAND IN LINUX
+	find . -name <filename>
+		- find all files inside current working directory with the given name
+	find . -iname <filename> (ignore case)
+	find . -type d -name <dirname>
+		-find all directories in current directory with the name
+	find $dir -type f -perm 777
+		- find all files in dir directory with permission 777
+	find . -type f -name "*.mp3" -exec rm -f {} \;
+		- find and remove multiple files 

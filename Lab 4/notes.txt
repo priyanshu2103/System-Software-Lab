@@ -96,6 +96,8 @@
 		sed -e 's/.../.../;t;d'
 		This will replace pattern and delete all lines that do not contain the pattern (t here without label deletes all the following commands and d deletes the line)
 
+		For multiple matchings, use sed 's/.../../g; s/.../.../g;' <filename>
+
 
 											5. How to use AWK
 
@@ -136,10 +138,12 @@
 	--> awk -F: '{ print $2 }' employee.txt
 			By default it uses white space as separating character, now it will use : as a separating character
 			Ex: Santiago:Bernebau if we do awk {print $2} will give blank ans
-				while awk -F: '{ print $2 }' employee.txt will give Bernebau as ans,.. it changed the separating character for classifying fields
+				while awk -F: '{ print $2 }' employee.txt will give Bernebau as ans,.. it changed the separating character for classifying fields 
+				OR
+				awk 'BEGIN{FS=":"}{print $2}' a.txt
 
 	--> awk '{ if (length($0) > max) max = length($0) } END { print max }' geeksforgeeks.txt
-			Line of maximum lenghth
+			Line of maximum length
 
 	--> awk 'END { print NR }' geeksforgeeks.txt
 			Number of lines 
