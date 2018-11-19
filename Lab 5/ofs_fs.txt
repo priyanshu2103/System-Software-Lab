@@ -1,0 +1,9 @@
+>Humanl|chr16:86430087-86430726 | element 1 | positive
+>Humanl|chr16:85620095-85621736 | element 2 | negative
+>Humanl|chr16:80423343-80424652 | element 3 | negative
+>Humanl|chr16:80372593-80373755 | element 4 | positive
+>Humanl|chr16:79969907-79971297 | element 5 | negative
+>Humanl|chr16:79949950-79951518 | element 6 | negative
+>Humanl|chr16:79026563-79028162 | element 7 | negative
+>Humanl|chr16:78933253-78934686 | element 9 | negative
+>Humanl|chr16:78832182-78833595 | element 10 | negative
