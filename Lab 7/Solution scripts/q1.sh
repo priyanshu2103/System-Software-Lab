@@ -17,3 +17,4 @@ do
 	echo -e $i		$mem		$disk		$cpu		 
 done
 # see uptime also
+# or you can use mpstat for doing cpu usage also

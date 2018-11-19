@@ -1,6 +1,18 @@
-while [ 1 ]
-do
-	sleep 1
-	df|if grep -q /dev/sdb; then echo Yes; else echo No; fi 
+#!/bin/bash
+# temp=$(lsusb | wc -l)	
+a=$(lsusb | wc -l)
+
+while [[ 1 ]]; do
+	
+	temp=$a 
+	a=$(lsusb | wc -l)
+	
+	if [[ a -gt temp ]]; then
+		#statements
+		echo Plugged
+	fi
+	if [[ a -lt temp ]]; then
+		#statements
+		echo Unplugged
+	fi
 done
-exit

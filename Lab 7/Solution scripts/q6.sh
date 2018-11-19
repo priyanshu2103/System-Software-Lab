@@ -12,7 +12,7 @@ size=$(ls -lh | grep total | awk '{print $2}')
 echo The total size is $size
 for f in *.pdf
 do
-	convert $f -resize 50% $f
+	convert $f -resize 25% $f
 done
 size2=$(ls -lh | grep total | awk '{print $2}')
 echo The total size is $size2
