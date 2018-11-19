@@ -10,6 +10,16 @@
 
 2. du -s * will give you the exact size of all the directories in a given directories while just doing du -s will give you the exact size of the directory in which you are
 
+sort -u does that, first it sorts and removes repition
+Ex: 12
+	12
+	13
+	14
+	31
+	15
+
+	after doing sort -u, the output file would be 12 13 14 15 31
+
 
 3. 											Some info on GREP
 

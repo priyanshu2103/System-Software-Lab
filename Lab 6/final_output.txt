@@ -6,3 +6,5 @@ Total no of files: 7
 Total no of directory: 13
 Total no of files: 7
 Total no of directory: 13
+Total no of files: 5
+Total no of directory: 15

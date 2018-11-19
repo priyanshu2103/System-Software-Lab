@@ -1,6 +1,7 @@
-dir1=$pwd
-dir2=$1
-cd 
-cd $dir2
-# execute it using . ./jump.sh <destination>
-
+12
+12
+13
+14
+41
+15
+15

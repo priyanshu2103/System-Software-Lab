@@ -127,3 +127,42 @@ for permissions use -r -w -x
 		- find all files in dir directory with permission 777
 	find . -type f -name "*.mp3" -exec rm -f {} \;
 		- find and remove multiple files 
+
+21. Read line by line
+	
+	while read line(can be named var)
+	do
+		...
+	done < <filename>
+
+	If file has say 3 words in each line and you wanna read word by word, do
+
+	while read num1 num2 num3 
+	do
+		...
+	done < <filename>
+
+22. Read word by word
+	while read line; do
+    for word in $line; do
+        echo "word = '$word'"
+    done < <filename>
+
+    OR
+    read -a words
+	echo "${words[@]}"
+
+23. READ character by character in shell
+	while read -n1 c; do
+    echo "$c"
+	done < $file
+
+24. Read char in command line and store in array
+	
+	x=0
+	for i in $@
+	do
+		let x=x+1
+		arr[x]=$i
+	done
+
